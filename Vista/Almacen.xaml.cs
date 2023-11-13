@@ -27,5 +27,6 @@ namespace ExamenPA.Vista
         /*
         añadir metods
          */
+        //iji
     }
 }
