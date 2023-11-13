@@ -1,0 +1,28 @@
+﻿<Window x:Class="ExamenPA.MainWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sistema de Ventas" Height="450" Width="734">
+    <Grid>
+        <Menu>
+            <MenuItem Header="Almacen">
+                <MenuItem Header="Categoria"/>
+                <MenuItem Header="Almacen"/>
+            </MenuItem>
+            <MenuItem Header="Productos">
+                <MenuItem Header="Producto" Click="ProductoClick"/>
+            </MenuItem>
+            <MenuItem Header="Proveedor">
+                <MenuItem Header="Proveedor"/>
+            </MenuItem>
+            <MenuItem Header="Cliente">
+                <MenuItem Header="Clientes"/>
+            </MenuItem>
+            <MenuItem Header="Ventas">
+                <MenuItem Header="Realizar Venta"/>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <!-- Aquí puedes agregar otros elementos de la interfaz de usuario, como jDesktopPane1, etc. -->
+        </Grid>
+    </Grid>
+</Window>
