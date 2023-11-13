@@ -39,7 +39,11 @@ namespace ExamenPA.Vista
 
         private void GuardarClick(object sender, RoutedEventArgs e)
         {
-            
+            if (datosVacios())
+            {
+                MessageBox.Show("Llene todos los campos");
+                return;
+            }   
             DataRow dr = CargarDatos().NewRow();
             dr["id"] = idTextBox.Text;
             dr["nombre"] = nombreTextBox.Text;
@@ -53,7 +57,10 @@ namespace ExamenPA.Vista
             dataGrid.ItemsSource = CargarDatos().DefaultView;
             tabControl.SelectedIndex = 0;
         }
-
+        public Boolean datosVacios()
+        {
+            return idTextBox.Text == "" || nombreTextBox.Text == "" || precioTextBox.Text == "" || categoriaComboBox.SelectedValue == "" || proveedorComboBox.SelectedValue == "";
+        }
         public void limpiar()
         {
             idTextBox.Text = "";
