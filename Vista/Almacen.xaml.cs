@@ -23,5 +23,9 @@ namespace ExamenPA.Vista
         {
             InitializeComponent();
         }
+
+        /*
+        añadir metods
+         */
     }
 }
