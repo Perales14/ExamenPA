@@ -5,8 +5,8 @@
     <Grid>
         <Menu>
             <MenuItem Header="Almacen">
-                <MenuItem Header="Categoria"/>
-                <MenuItem Header="Almacen"/>
+                <MenuItem Header="Categoria" Click="CategoriaClick"/>
+                <MenuItem Header="Almacen" Click="AlmacenClick"/>
             </MenuItem>
             <MenuItem Header="Productos">
                 <MenuItem Header="Producto" Click="ProductoClick"/>

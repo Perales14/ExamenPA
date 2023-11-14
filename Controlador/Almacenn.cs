@@ -4,15 +4,18 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using ExamenPA.Modelo;
 namespace ExamenPA.Controlador
 {
-    internal class Producto
+    internal class Almacenn
     {
-        Product modelo = new Product();
+        Almacen modelo = new Almacen();
+        public Almacenn()
+        {
+        }
 
-        public void Guardar(DataRow dr, Boolean nuevo) {
+        public void Guardar(DataRow dr, Boolean nuevo)
+        {
             //TODO: Guardar
             if (nuevo)
             {
@@ -30,21 +33,6 @@ namespace ExamenPA.Controlador
         {
             return modelo.DatosTabla();
         }
-
-        public List<string> productos()
-        {
-            DataTable dt = modelo.DatosTabla();
-            List<string> productos = new List<string>();
-            
-            
-            foreach(DataRow dr in dt.Rows)
-            {
-                productos.Add(dr["nombre"].ToString());
-            }
-
-            return productos;
-        }
-
 
 
     }

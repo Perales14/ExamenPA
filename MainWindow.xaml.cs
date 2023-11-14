@@ -31,5 +31,16 @@ namespace ExamenPA
             producto = new ProductoVista();
             producto.Show();
         }
+        private void AlmacenClick(object sender, RoutedEventArgs e)
+        {
+            AlmacenVista almacen = new AlmacenVista();
+            almacen.Show();
+        }
+        private void CategoriaClick(object sender, RoutedEventArgs e)
+        {
+            CategoriaVista categoria = new CategoriaVista();
+            categoria.Show();
+        }
+
     }
 }

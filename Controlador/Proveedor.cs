@@ -1,18 +1,19 @@
-﻿using System;
+﻿using ExamenPA.Modelo;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using ExamenPA.Modelo;
 namespace ExamenPA.Controlador
 {
-    internal class Producto
+    internal class Proveedor
     {
-        Product modelo = new Product();
+        Provedor modelo = new Provedor();
 
-        public void Guardar(DataRow dr, Boolean nuevo) {
+        public void Guardar(DataRow dr, Boolean nuevo)
+        {
             //TODO: Guardar
             if (nuevo)
             {
@@ -31,21 +32,18 @@ namespace ExamenPA.Controlador
             return modelo.DatosTabla();
         }
 
-        public List<string> productos()
+        public List<string> proveedores()
         {
             DataTable dt = modelo.DatosTabla();
-            List<string> productos = new List<string>();
-            
-            
-            foreach(DataRow dr in dt.Rows)
+            List<string> proveedores = new List<string>();
+
+
+            foreach (DataRow dr in dt.Rows)
             {
-                productos.Add(dr["nombre"].ToString());
+                proveedores.Add(dr["nombre"].ToString());
             }
 
-            return productos;
+            return proveedores;
         }
-
-
-
     }
 }

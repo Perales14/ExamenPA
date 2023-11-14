@@ -1,0 +1,69 @@
+﻿<Window x:Class="ExamenPA.Vista.ProveedorVista"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExamenPA.Vista"
+        mc:Ignorable="d"
+        Title="ProveedorVista" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- Botones -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+            <Button Content="Agregar" Click="AgregarButton_Click" />
+            <Button Content="Modificar" Click="ModificarButton_Click" />
+        </StackPanel>
+
+        <TabControl Name="tabControl" Grid.Row="1">
+            <TabItem Header="Listado">
+                <ScrollViewer>
+                    <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" >
+                        <!-- Configuración de columnas si es necesario -->
+                    </DataGrid>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Mantenimiento" IsEnabled="False" >
+                <!-- Contenido de la pestaña Mantenimiento -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Agrega más RowDefinitions según sea necesario -->
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Label Content="ID:"/>
+                        <TextBox x:Name="idTextBox" Margin="5" Height="20" Width ="50"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Label Content="Nombre:"/>
+                        <TextBox x:Name="nombreTextBox" Margin="5" Height="20" Width ="50"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <Label Content="Telefono:"/>
+                        <TextBox x:Name="TelefonoTextBox" Margin="5" Height="20" Width ="50" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="100">
+                        <Button Content="Guardar" Margin="5" Click="GuardarClick"/>
+                        <Button Content="Cancelar" Margin="5" Click="CancelarClick"/>
+                    </StackPanel>
+
+
+
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
