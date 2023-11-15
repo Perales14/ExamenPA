@@ -25,5 +25,9 @@ namespace ExamenPA.Controlador
         {
             modelo.anular(dr);
         }
+        public void productos()
+        {
+
+        }
     }
 }

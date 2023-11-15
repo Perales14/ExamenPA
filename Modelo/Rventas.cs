@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ExamenPA.Controlador;
 using System.IO;
+using System.Windows;
 
 namespace ExamenPA.Modelo
 {
@@ -25,19 +26,19 @@ namespace ExamenPA.Modelo
 
         public void crear()
         {
-
-        }
-
-        public Boolean existe()
-        {
-            string rutaArchivo = @"Ventas/venta.txt"; // Ruta completa del archivo
-
-            if (File.Exists(rutaArchivo))
+            String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            direc = Path.GetDirectoryName(direc);
+            direc = Path.GetDirectoryName(direc);
+            string rutaArchivo = Path.Combine(direc, "Ventas", "ventas.txt");
+            string ruta = Path.Combine(direc, "Ventas");
+            if (!Directory.Exists(ruta))
             {
-                return true;
+                Directory.CreateDirectory(ruta);
             }
-            return false;
-            
+            if (!File.Exists(rutaArchivo))
+            {
+                using (StreamWriter sw = File.CreateText(rutaArchivo)) { }
+            }
         }
         
         public DataTable buscaridventa(String idventa)
@@ -45,8 +46,14 @@ namespace ExamenPA.Modelo
             DataTable data = alma.DatosTabla();
             DataRow dr = data.NewRow();
 
-            string[] lineas = System.IO.File.ReadAllLines(@"Ventas/venta.txt");
+            
 
+            String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            direc = Path.GetDirectoryName(direc);
+            direc = Path.GetDirectoryName(direc);
+            string rutaArchivo = Path.Combine(direc, "Ventas", "ventas.txt");
+            string[] lineas = File.ReadAllLines(rutaArchivo);
+            MessageBox.Show(rutaArchivo);
             foreach (string linea in lineas)
             {
                 string[] elementos = linea.Split(',');
@@ -91,6 +98,8 @@ namespace ExamenPA.Modelo
                     }
                 }
             }
+
+            dr.Table.Columns["stock"].ColumnName = "cantidad";
 
             return data;
             

@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ExamenPA.Vista;
+using Path = System.IO.Path;
+
 namespace ExamenPA
 {
     /// <summary>
@@ -58,10 +60,6 @@ namespace ExamenPA
             venta.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string rutaProyecto = Directory.GetCurrentDirectory();
-            MessageBox.Show(rutaProyecto);
-        }
+        
     }
 }
