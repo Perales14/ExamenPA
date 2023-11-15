@@ -18,18 +18,20 @@ using ExamenPA.Controlador;
 namespace ExamenPA.Vista
 {
     /// <summary>
-    /// Lógica de interacción para AlmacenVista.xaml
+    /// Lógica de interacción para ClientesVista.xaml
     /// </summary>
-    public partial class AlmacenVista : Window
+    public partial class ClientesVista : Window
     {
-        private Almacenn control = new Almacenn();
-        private Categoria categoria = new Categoria();
-        private Proveedor proveedor = new Proveedor();
+        private Cliente control = new Cliente();
+        //private Categoria categoria = new Categoria();
+        //private Proveedor proveedor = new Proveedor();
         Boolean nuevo;
-        public AlmacenVista()
+        public ClientesVista()
         {
             InitializeComponent();
             dataGrid.ItemsSource = CargarDatos().DefaultView;
+            //categoriaComboBox.ItemsSource = categoria.().DefaultView;
+            //proveedorComboBox.ItemsSource = proveedor.().DefaultView;
         }
 
         private DataTable CargarDatos()
@@ -47,11 +49,6 @@ namespace ExamenPA.Vista
             DataRow dr = CargarDatos().NewRow();
             dr["id"] = idTextBox.Text;
             dr["nombre"] = nombreTextBox.Text;
-            dr["precio"] = precioTextBox.Text;
-            dr["stock"] = stockTextBox.Text;
-            dr["categoria"] = categoriaComboBox.Text;
-            dr["proveedor"] = proveedorComboBox.Text;
-
 
             control.Guardar(dr, nuevo);
             limpiar();
@@ -60,16 +57,12 @@ namespace ExamenPA.Vista
         }
         private Boolean datosVacios()
         {
-            return idTextBox.Text == "" || nombreTextBox.Text == "" || precioTextBox.Text == "" || stockTextBox.Text==""|| categoriaComboBox.SelectedValue == "" || proveedorComboBox.SelectedValue == "";
+            return idTextBox.Text == "" || nombreTextBox.Text == "" ;
         }
         private void limpiar()
         {
             idTextBox.Text = "";
             nombreTextBox.Text = "";
-            precioTextBox.Text = "";
-            stockTextBox.Text = "";
-            categoriaComboBox.SelectedValue = "";
-            proveedorComboBox.SelectedValue = "";
 
         }
 
@@ -81,28 +74,14 @@ namespace ExamenPA.Vista
 
         }
 
-        public void CombosBoxs()
-        {
-            
-            categoriaComboBox.ItemsSource = categoria.ObtenerClientes();
-            proveedorComboBox.ItemsSource = proveedor.proveedores();
-        }
-
-
         private void ModificarButton_Click(object sender, RoutedEventArgs e)
         {
-
             if (dataGrid.SelectedIndex >= 0)
             {
                 //carga los datos en los campos
                 DataRowView row = (DataRowView)dataGrid.SelectedItem;
                 idTextBox.Text = row["id"].ToString();
                 nombreTextBox.Text = row["nombre"].ToString();
-                precioTextBox.Text = row["precio"].ToString();
-                stockTextBox.Text = row["stock"].ToString();
-                categoriaComboBox.SelectedValue = row["categoria"].ToString();
-                proveedorComboBox.SelectedValue = row["proveedor"].ToString();
-                CombosBoxs();
                 tabControl.SelectedIndex = 1;
                 nuevo = false;
             }
@@ -113,7 +92,6 @@ namespace ExamenPA.Vista
         }
         private void AgregarButton_Click(object sender, RoutedEventArgs e)
         {
-            CombosBoxs();
             nuevo = true;
             tabControl.SelectedIndex = 1;
 

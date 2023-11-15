@@ -1,11 +1,11 @@
-﻿<Window x:Class="ExamenPA.Vista.AlmacenVista"
+﻿<Window x:Class="ExamenPA.Vista.ClientesVista"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExamenPA.Vista"
         mc:Ignorable="d"
-        Title="AlmacenVista" Height="450" Width="800">
+        Title="ClientesVista" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -49,33 +49,7 @@
                         <TextBox x:Name="nombreTextBox" Margin="5" Height="20" Width ="50"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        <Label Content="Precio:"/>
-                        <TextBox x:Name="precioTextBox" Margin="5" Height="20" Width ="50"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="3" Orientation="Horizontal">
-                        <Label Content="Stock:"/>
-                        <TextBox x:Name="stockTextBox" Margin="5" Height="20" Width ="50"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="4" Orientation="Horizontal">
-                        <Label Content="Categoría:"/>
-                        <ComboBox x:Name="categoriaComboBox" Margin="5">
-                            <!-- Agrega elementos al ComboBox según tus necesidades -->
-                            
-                        </ComboBox>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="5" Orientation="Horizontal">
-                        <Label Content="Proveedor:"/>
-                        <ComboBox x:Name="proveedorComboBox" Margin="5" Height="20" VerticalAlignment="Top">
-                            <!-- Agrega elementos al ComboBox según tus necesidades -->
-                            
-                        </ComboBox>
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="100">
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="100">
                         <Button Content="Guardar" Margin="5" Click="GuardarClick"/>
                         <Button Content="Cancelar" Margin="5" Click="CancelarClick"/>
                     </StackPanel>

@@ -12,13 +12,13 @@
                 <MenuItem Header="Producto" Click="ProductoClick"/>
             </MenuItem>
             <MenuItem Header="Proveedor">
-                <MenuItem Header="Proveedor"/>
+                <MenuItem Header="Proveedor" Click="ProveedorClick"/>
             </MenuItem>
             <MenuItem Header="Cliente">
-                <MenuItem Header="Clientes"/>
+                <MenuItem Header="Clientes" Click="ClientesClick"/>
             </MenuItem>
             <MenuItem Header="Ventas">
-                <MenuItem Header="Realizar Venta"/>
+                <MenuItem Header="Realizar Venta" Click="VentaClick"/>
             </MenuItem>
         </Menu>
         <Grid>

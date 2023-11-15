@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using ExamenPA.Modelo;
 namespace ExamenPA.Controlador
 {
-    internal class Categoria
+    internal class Cliente
     {
-        CategoriaM modelo = new CategoriaM();
-        public Categoria()
+        ClienteM modelo = new ClienteM();
+        public Cliente()
         {
         }
 
@@ -30,25 +30,13 @@ namespace ExamenPA.Controlador
             }
 
         }
+        public void id(String id)
+        {
+            modelo.id(id);
+        }
         public DataTable Obtenerdatos()
         {
             return modelo.DatosTabla();
         }
-        public List<string> ObtenerClientes ()
-        {
-            DataTable dt = modelo.DatosTabla();
-            List<string> Categoria = new List<string>();
-
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                Categoria.Add(dr["nombre"].ToString());
-            }
-
-            return Categoria;
-        }
-        //crear metodo que devuelva una lista de string con los nombres de los clientes
-        
-
     }
 }

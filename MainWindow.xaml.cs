@@ -41,6 +41,21 @@ namespace ExamenPA
             CategoriaVista categoria = new CategoriaVista();
             categoria.Show();
         }
+        private void ProveedorClick(object sender, RoutedEventArgs e)
+        {
+            ProveedorVista proveedor = new ProveedorVista();
+            proveedor.Show();
+        }   
+        private void ClientesClick(object sender, RoutedEventArgs e)
+        {
+            ClientesVista clientes = new ClientesVista();
+            clientes.Show();
+        }
+        private void VentaClick(object sender, RoutedEventArgs e)
+        {
+            Reporteventa venta = new Reporteventa();
+            venta.Show();
+        }
 
     }
 }

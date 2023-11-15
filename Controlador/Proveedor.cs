@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ExamenPA.Modelo;
+
 namespace ExamenPA.Controlador
 {
     internal class Proveedor

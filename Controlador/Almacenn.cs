@@ -34,6 +34,18 @@ namespace ExamenPA.Controlador
             return modelo.DatosTabla();
         }
 
+        public List<string> productos()
+        {
+            DataTable dt = modelo.DatosTabla();
+            List<string> Clientes = new List<string>();
 
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Clientes.Add(dr["nombre"].ToString());
+            }
+
+            return Clientes;
+        }
     }
 }

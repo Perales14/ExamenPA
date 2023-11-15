@@ -5,10 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace ExamenPA.Modelo
 {
-    internal class Almacen
+    internal class ClienteM
     {
         //conectar a la base de datos
         //y hacer consultas sobre ellas, las CRUD
@@ -19,7 +20,7 @@ namespace ExamenPA.Modelo
         //String conectar = "@Provider=Microsoft.ACE.OLEDB.12.0;Data Source=DataBasePA.accdb";
         protected OleDbConnection conexion;
 
-        public Almacen()
+        public ClienteM()
         {
 
 
@@ -38,7 +39,7 @@ namespace ExamenPA.Modelo
             OleDbDataReader dr;
             DataTable dataTable = new DataTable();
             cmd.Connection = conexion;
-            cmd.CommandText = "SELECT * FROM Almacen";
+            cmd.CommandText = "SELECT * FROM Clientes";
             dr = cmd.ExecuteReader();
             dataTable.Load(dr);
             conexion.Close();
@@ -51,7 +52,7 @@ namespace ExamenPA.Modelo
             abrir();
             OleDbCommand cmd = new OleDbCommand();
             cmd.Connection = conexion;
-            cmd.CommandText = "INSERT INTO Almacen (id, nombre, precio, Stock, categoria, proveedor) VALUES ('" + dr["id"] + "','" + dr["nombre"] + "','" + dr["precio"] + "','" + dr["stock"]+ "','" + dr["categoria"] + "','" + dr["proveedor"] + "')";
+            cmd.CommandText = "INSERT INTO Clientes (id, nombre) VALUES ('" + dr["id"] + "','" + dr["nombre"]  + "')";
             cmd.ExecuteNonQuery();
             conexion.Close();
         }
@@ -61,20 +62,37 @@ namespace ExamenPA.Modelo
             OleDbCommand cmd = new OleDbCommand();
 
             cmd.Connection = conexion;
-            cmd.CommandText = "UPDATE Almacen SET nombre=?, precio=?,Stock=?, categoria=?, proveedor=? WHERE Id=?";
+            cmd.CommandText = "UPDATE Clientes SET nombre=? WHERE Id=?";
             cmd.Parameters.AddWithValue("nombre", dr["nombre"]);
-            cmd.Parameters.AddWithValue("precio", dr["precio"]);
-            cmd.Parameters.AddWithValue("Stock", dr["Stock"]);
-            cmd.Parameters.AddWithValue("categoria", dr["categoria"]);
-            cmd.Parameters.AddWithValue("proveedor", dr["proveedor"]);
             cmd.Parameters.AddWithValue("Id", dr["Id"]);
             cmd.ExecuteNonQuery();
             conexion.Close();
 
         }
 
+        public String id (String nombre)
+        {
+            abrir();
+            OleDbCommand cmd = new OleDbCommand();
 
+            cmd.Connection = conexion;
+            cmd.CommandText = "SELECT id From WHERE nombre=?";
+            cmd.Parameters.AddWithValue("nombre", nombre);
+            //cmd.ExecuteNonQuery();
+            object resultado = cmd.ExecuteScalar();
+            String id="";
+            if (resultado != null)
+            {
+                id = Convert.ToString(resultado);
+                conexion.Close();
+            } else
+            {
+                return "";
+            }
 
+            return id;
+        }
 
+        
     }
 }

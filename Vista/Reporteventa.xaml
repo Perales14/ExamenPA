@@ -1,0 +1,78 @@
+﻿<Window x:Class="ExamenPA.Vista.Reporteventa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExamenPA.Vista"
+        mc:Ignorable="d"
+        Title="Reporteventa" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!-- Botones -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+            <Button Content="Nuevo" Click="AgregarButton_Click" Margin="5"/>
+            <Button Content="Anular" Click="AnularButton_Click" Margin="5"/>
+            <Button Content="Detalles" Click="DetallesClick" Margin="5"/>
+        </StackPanel>
+
+        <TabControl Name="tabControl" Grid.Row="1">
+            <TabItem Header="Listado">
+                <ScrollViewer>
+                    <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" >
+                        <!-- Configuración de columnas si es necesario -->
+                    </DataGrid>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Mantenimiento" IsEnabled="False" >
+                <!-- Contenido de la pestaña Mantenimiento -->
+                <StackPanel Orientation="Vertical">
+                    <DockPanel>
+                        <Label Content="ID:" />
+                        <TextBox x:Name="Textboxid" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <WrapPanel>
+
+                        <Label Content="Descuento:" HorizontalAlignment="Left" />
+                        <TextBox x:Name="Textboxdescuento" Width="81" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <Label Content="fddfdfdfdfdfdfdfddfd:" IsEnabled="False" Visibility="Hidden"/>
+                        <Label Content="Fecha:" HorizontalAlignment="Center"/>
+                        <DatePicker Name="Fechat" />
+                    </WrapPanel>
+                    <DockPanel>
+                        <Label Content="Cliente:" />
+                        <ComboBox x:Name="Comboboxcliente" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Producto:" />
+                        <ComboBox x:Name="Comboboxproducto" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Cantidad:" />
+                        <TextBox x:Name="Textboxcantidad" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <ScrollViewer>
+                        <DataGrid x:Name="dataGridproductos" AutoGenerateColumns="True" >
+                            <!-- Configuración de columnas si es necesario -->
+                        </DataGrid>
+                    </ScrollViewer>
+                    <DockPanel VerticalAlignment="Bottom">
+                        <Button x:Name="Eliminar" Content="Eliminar" Click="EliminarButton_Click" VerticalAlignment="Center"/>
+                        <DockPanel  HorizontalAlignment="Right">
+                            <Label Content="Total:" HorizontalAlignment="Right" />
+                            <TextBox x:Name="Textboxtotal" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </DockPanel>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button x:Name="Guardar" Content="Guardar" Click="GuardarButtonClick"  HorizontalAlignment="Center" />
+                        <Button x:Name="Cancelar" Content="Cancelar" Click="CancelarButtonClick"  HorizontalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
