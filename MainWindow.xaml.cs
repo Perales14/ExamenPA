@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,5 +58,10 @@ namespace ExamenPA
             venta.Show();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string rutaProyecto = Directory.GetCurrentDirectory();
+            MessageBox.Show(rutaProyecto);
+        }
     }
 }

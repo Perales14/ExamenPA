@@ -22,6 +22,7 @@
             </MenuItem>
         </Menu>
         <Grid>
+            <Button Content="Button" HorizontalAlignment="Left" Height="87" Margin="198,143,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click" Visibility="Hidden"/>
             <!-- Aquí puedes agregar otros elementos de la interfaz de usuario, como jDesktopPane1, etc. -->
         </Grid>
     </Grid>
