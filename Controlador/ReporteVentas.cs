@@ -25,9 +25,9 @@ namespace ExamenPA.Controlador
         {
             modelo.anular(dr);
         }
-        public void productos()
+        public DataTable productos(String id)
         {
-
+            return modelo.buscaridventa(id); 
         }
     }
 }

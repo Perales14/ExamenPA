@@ -22,6 +22,8 @@ namespace ExamenPA.Vista
     public partial class Reporteventa : Window
     {
         ReporteVentas controlador = new ReporteVentas();
+        Proveedor controp = new Proveedor();
+        Cliente controc = new Cliente();
         public Reporteventa()
         {
             InitializeComponent();
@@ -52,6 +54,7 @@ namespace ExamenPA.Vista
                 Comboboxcliente.Text = dataRowView["cliente"].ToString();
                 Comboboxproducto.Text = dataRowView["producto"].ToString();
                 Textboxtotal.Text = dataRowView["Total"].ToString();
+                dataGridproductos.ItemsSource = controlador.productos(dataRowView["id"].ToString()).DefaultView;
                 
             }
         }
@@ -60,6 +63,9 @@ namespace ExamenPA.Vista
         private void AgregarButton_Click(object sender, RoutedEventArgs e)
         {
             vaciar();
+            //lenar los combobox proveedor y producto
+            Comboboxcliente.ItemsSource = controc.clientes();
+            Comboboxproducto.ItemsSource = controp.proveedores();
             tabControl.SelectedIndex = 1;   
         }
         private void AnularButton_Click(object sender, RoutedEventArgs e)
@@ -94,9 +100,11 @@ namespace ExamenPA.Vista
 
         private void DetallesClick(object sender, RoutedEventArgs e)
         {
-            if (dataGridproductos.SelectedIndex >= 0)
+            if (dataGrid.SelectedIndex >= 0)
             {
                 llenar();
+                Guardar.Visibility = Visibility.Hidden;
+                Eliminar.Visibility = Visibility.Hidden;
                 tabControl.SelectedIndex = 1;
             }
             else
@@ -124,8 +132,12 @@ namespace ExamenPA.Vista
         }
         private void CancelarButtonClick(object sender, RoutedEventArgs e)
         {
+
             vaciar();
+            
             tabControl.SelectedIndex = 0;
+            Guardar.Visibility = Visibility.Visible;
+            Eliminar.Visibility = Visibility.Visible;
 
         }
     }
