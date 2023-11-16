@@ -186,7 +186,7 @@ namespace ExamenPA.Vista
         
         private void GuardarButtonClick(object sender, RoutedEventArgs e)
         {
-            //si los textbos estan vacios no guarda y muestra mensaje para que los llene
+            
             if (Textboxid.Text == "" ||Fechat.Text==""||Textboxdescuento.Text==""||Comboboxcliente.Text=="")
             {
                 MessageBox.Show("Debe llenar todos los campos", "Guardar", MessageBoxButton.OK, MessageBoxImage.Error);
