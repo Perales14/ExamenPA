@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,10 @@ namespace ExamenPA.Controlador
         {
             return modelo.DatosTabla();
         }
+        public DataTable datos()
+        {
+            return modelo.Datos();
+        }
 
         public List<string> productos()
         {
@@ -43,6 +48,11 @@ namespace ExamenPA.Controlador
             }
 
             return productos;
+        }
+
+        public DataRow producto(String nombre)
+        {
+            return modelo.producto(nombre);
         }
 
 

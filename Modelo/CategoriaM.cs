@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ExamenPA.Modelo
 {
@@ -20,7 +21,11 @@ namespace ExamenPA.Modelo
 
         public void abrir()
         {
-            conexion = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\luisg\source\repos\ExamenPA\DataBasePA.accdb");
+            String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            direc = Path.GetDirectoryName(direc);
+            direc = Path.GetDirectoryName(direc);
+            string ruta = Path.Combine(direc, "DataBasePA.accdb");
+            conexion = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + ruta);
             conexion.Open();
         }
 

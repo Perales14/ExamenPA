@@ -20,7 +20,7 @@ namespace ExamenPA.Modelo
 
         public Rventas()
         {
-
+            crear();
 
         }
 
@@ -53,7 +53,7 @@ namespace ExamenPA.Modelo
             direc = Path.GetDirectoryName(direc);
             string rutaArchivo = Path.Combine(direc, "Ventas", "ventas.txt");
             string[] lineas = File.ReadAllLines(rutaArchivo);
-            MessageBox.Show(rutaArchivo);
+            //MessageBox.Show(rutaArchivo);
             foreach (string linea in lineas)
             {
                 string[] elementos = linea.Split(',');
@@ -89,11 +89,6 @@ namespace ExamenPA.Modelo
                                 }
                             }
 
-                            //"SELECT id From WHERE nombre=?";
-                            //cantidades.Add(Convert.ToInt32(elementos[i].Trim()));
-                            //productos.Add(elementos[i + 1].Trim());
-                            //agregar a data el datarow  dr
-                            
                         }
                     }
                 }
@@ -106,9 +101,31 @@ namespace ExamenPA.Modelo
 
         }
 
+        public void guardaridventa(String idventa, DataTable data)
+        {
+            crear();
+            String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            direc = Path.GetDirectoryName(direc);
+            direc = Path.GetDirectoryName(direc);
+            string rutaArchivo = Path.Combine(direc, "Ventas", "ventas.txt");
+            using (StreamWriter sw = File.AppendText(rutaArchivo))
+            {
+                sw.WriteLine(idventa);
+                sw.WriteLine(",");
+                foreach (DataRow dr in data.Rows)
+                {
+                    sw.WriteLine(dr["cantidad"] + "," + dr["id"]);
+                }
+            }
+        }
+
         public void abrir()
         {
-            conexion = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\luisg\source\repos\ExamenPA\DataBasePA.accdb");
+            String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            direc = Path.GetDirectoryName(direc);
+            direc = Path.GetDirectoryName(direc);
+            string ruta = Path.Combine(direc, "DataBasePA.accdb");
+            conexion = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + ruta);
             conexion.Open();
         }
 
@@ -132,8 +149,7 @@ namespace ExamenPA.Modelo
             abrir();
             OleDbCommand cmd = new OleDbCommand();
             cmd.Connection = conexion;
-            string estado = (Boolean)dr["estado"] ? "verdadero" : "falso";
-            cmd.CommandText = "INSERT INTO Reporte (id, Fecha,descuento,IDcliente, cliente, Total, Estado) VALUES ('" + dr["id"] + "','" + dr["Fecha"] + "','" + dr["descuento"] + "','" + dr["IDcliente"] + "','" + dr["cliente"] + "','" + dr["Total"] + "','" + estado  + "')";
+            cmd.CommandText = "INSERT INTO Reporte (id, Fecha,descuento,IDcliente, cliente, Total, Estado) VALUES ('" + dr["id"] + "','" + dr["Fecha"] + "','" + dr["descuento"] + "','" + dr["IDcliente"] + "','" + dr["cliente"] + "','" + dr["Total"] + "','" + "activa"  + "')";
             cmd.ExecuteNonQuery();
             conexion.Close();
         }
@@ -143,14 +159,13 @@ namespace ExamenPA.Modelo
             OleDbCommand cmd = new OleDbCommand();
 
             cmd.Connection = conexion;
-            string estado = (Boolean)dr["estado"] ? "verdadero" : "falso";
             cmd.CommandText = "UPDATE Reporte SET Fecha=?, descuento=?, IDcliente=?, cliente=?, Total=?, Estado=? WHERE Id=?";
             cmd.Parameters.AddWithValue("Fecha", dr["Fecha"]);
             cmd.Parameters.AddWithValue("descuento", dr["descuento"]);
             cmd.Parameters.AddWithValue("IDcliente", dr["IDcliente"]);
             cmd.Parameters.AddWithValue("cliente", dr["cliente"]);
             cmd.Parameters.AddWithValue("Total", dr["Total"]);
-            cmd.Parameters.AddWithValue("Estado", estado); // Si el campo en la base de datos acepta "verdadero" o "falso"
+            cmd.Parameters.AddWithValue("Estado", "activa"); // Si el campo en la base de datos acepta "verdadero" o "falso"
 
             cmd.Parameters.AddWithValue("Id", dr["Id"]);
 
@@ -164,9 +179,8 @@ namespace ExamenPA.Modelo
             OleDbCommand cmd = new OleDbCommand();
 
             cmd.Connection = conexion;
-            string estado = (Boolean)dr["estado"] ? "verdadero" : "falso";
             cmd.CommandText = "UPDATE Reporte SET Estado=? WHERE Id=?";
-            cmd.Parameters.AddWithValue("Estado", estado); // Si el campo en la base de datos acepta "verdadero" o "falso"
+            cmd.Parameters.AddWithValue("Estado", "anulada"); // Si el campo en la base de datos acepta "verdadero" o "falso"
             cmd.Parameters.AddWithValue("Id", dr["Id"]);
 
             cmd.ExecuteNonQuery();

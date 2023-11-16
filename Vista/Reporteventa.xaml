@@ -18,7 +18,7 @@
             <Button Content="Detalles" Click="DetallesClick" Margin="5"/>
         </StackPanel>
 
-        <TabControl Name="tabControl" Grid.Row="1">
+        <TabControl Name="tabControl" Grid.Row="1" >
             <TabItem Header="Listado">
                 <ScrollViewer>
                     <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" >
@@ -53,6 +53,10 @@
                     <DockPanel>
                         <Label Content="Cantidad:" />
                         <TextBox x:Name="Textboxcantidad" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        <DockPanel HorizontalAlignment="Right">
+                            <!--agregar el boton de agregar-->
+                            <Button x:Name="Agregarproducto" Content="Agregar" Click="Agregarproducto_Click" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        </DockPanel>
                     </DockPanel>
                     <ScrollViewer>
                         <DataGrid x:Name="dataGridproductos" AutoGenerateColumns="True" >

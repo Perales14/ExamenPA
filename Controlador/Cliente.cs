@@ -30,9 +30,9 @@ namespace ExamenPA.Controlador
             }
 
         }
-        public void id(String id)
+        public String id(String nombre)
         {
-            modelo.id(id);
+            return modelo.id(nombre);
         }
         public DataTable Obtenerdatos()
         {

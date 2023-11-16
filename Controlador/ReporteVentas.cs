@@ -29,5 +29,10 @@ namespace ExamenPA.Controlador
         {
             return modelo.buscaridventa(id); 
         }
+
+        public void guardaridventa(String id, DataTable dr)
+        {
+            modelo.guardaridventa(id, dr);
+        }
     }
 }

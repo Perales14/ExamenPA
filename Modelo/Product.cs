@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ExamenPA.Modelo
 {
@@ -27,7 +29,11 @@ namespace ExamenPA.Modelo
 
         public void abrir()
         {
-            conexion = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\luisg\source\repos\ExamenPA\DataBasePA.accdb");
+            String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            direc = Path.GetDirectoryName(direc);
+            direc = Path.GetDirectoryName(direc);
+            string ruta = Path.Combine(direc, "DataBasePA.accdb");
+            conexion = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + ruta);
             conexion.Open();
         }
 
@@ -48,6 +54,24 @@ namespace ExamenPA.Modelo
             return dataTable;
 
         }
+        public DataTable Datos()
+        {
+            abrir();
+            OleDbCommand cmd = new OleDbCommand();
+            OleDbDataReader dr;
+            DataTable dataTable = new DataTable();
+            cmd.Connection = conexion;
+            cmd.CommandText = "SELECT * FROM Almacen";
+            dr = cmd.ExecuteReader();
+            dataTable.Load(dr);
+            conexion.Close();
+
+            dataTable.Columns["stock"].ColumnName = "cantidad";
+            //eliminar la row de "stock"
+
+            return dataTable;
+
+        }
 
         public void insertar(DataRow dr)
         {
@@ -64,7 +88,7 @@ namespace ExamenPA.Modelo
             OleDbCommand cmd = new OleDbCommand();
             
             cmd.Connection = conexion;
-            cmd.CommandText = "UPDATE Producto SET nombre=?, precio=?, categoria=?, proveedor=? WHERE Id=?";
+            cmd.CommandText = "UPDATE Almacen SET nombre=?, precio=?, categoria=?, proveedor=? WHERE Id=?";
             cmd.Parameters.AddWithValue("nombre", dr["nombre"]);
             cmd.Parameters.AddWithValue("precio", dr["precio"]);
             cmd.Parameters.AddWithValue("categoria", dr["categoria"]);
@@ -75,6 +99,45 @@ namespace ExamenPA.Modelo
 
         }
 
+        public DataRow producto(String nombre)
+        {
+            abrir();
+            OleDbCommand cmd = new OleDbCommand();
+            OleDbDataReader dr;
+            DataTable dataTable = new DataTable();
+            cmd.Connection = conexion;
+            cmd.CommandText = "SELECT * FROM Almacen";
+            dr = cmd.ExecuteReader();
+            dataTable.Load(dr);
+            conexion.Close();
+            DataRow Dr = dataTable.NewRow();
+            //eliminar la row de "stock"
+            //dataTable.Columns.Remove("stock");
+            //MessageBox.Show(nombre);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                String imp = row["nombre"].ToString();
+                //MessageBox.Show("dentro"+nombre);
+
+                if (imp.Equals(nombre))
+                {
+                    //MessageBox.Show(imp+"=="+nombre);
+                    
+                    
+
+                    if (row.Table.Columns.Count == Dr.Table.Columns.Count)
+                    {
+                        Dr.ItemArray = row.ItemArray.Clone() as object[];
+                        String D = Dr["nombre"].ToString();
+                        //MessageBox.Show(D);
+                    }
+                    
+                    break;
+                }
+            }
+
+            return Dr;
+        }
         
 
 

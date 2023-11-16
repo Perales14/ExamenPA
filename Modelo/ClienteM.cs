@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using System.IO;
 
 namespace ExamenPA.Modelo
 {
@@ -28,7 +29,12 @@ namespace ExamenPA.Modelo
 
         public void abrir()
         {
-            conexion = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\luisg\source\repos\ExamenPA\DataBasePA.accdb");
+            //String ax = "C:\Users\luis\source\repos\ExamenPA\DataBasePA.accdb";
+            String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            direc = Path.GetDirectoryName(direc);
+            direc = Path.GetDirectoryName(direc);
+            string ruta = Path.Combine(direc, "DataBasePA.accdb");
+            conexion = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source="+ruta);
             conexion.Open();
         }
 
@@ -76,7 +82,7 @@ namespace ExamenPA.Modelo
             OleDbCommand cmd = new OleDbCommand();
 
             cmd.Connection = conexion;
-            cmd.CommandText = "SELECT id From WHERE nombre=?";
+            cmd.CommandText = "SELECT id From Clientes WHERE nombre=?";
             cmd.Parameters.AddWithValue("nombre", nombre);
             //cmd.ExecuteNonQuery();
             object resultado = cmd.ExecuteScalar();
