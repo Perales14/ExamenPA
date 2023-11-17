@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ExamenPA.Controlador
 {
@@ -27,6 +28,7 @@ namespace ExamenPA.Controlador
         }
         public DataTable productos(String id)
         {
+            MessageBox.Show("modelo");
             return modelo.buscaridventa(id); 
         }
 

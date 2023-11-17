@@ -54,6 +54,7 @@ namespace ExamenPA.Vista
         //llenar los campos con los datos SELECIONADOS
         private void llenar()
         {
+            dataproductos.Clear();
             if (dataGrid.SelectedIndex >= 0)
             {
                 //carga los datos en los campos
@@ -61,9 +62,11 @@ namespace ExamenPA.Vista
                 Textboxid.Text = dataRowView["id"].ToString();
                 Fechat.Text = dataRowView["Fecha"].ToString();
                 Textboxdescuento.Text = dataRowView["descuento"].ToString();
+                Comboboxcliente.ItemsSource = controc.clientes();
                 Comboboxcliente.Text = dataRowView["cliente"].ToString();
                 //Comboboxproducto.Text = dataRowView["producto"].ToString();
                 Textboxtotal.Text = dataRowView["Total"].ToString();
+                //MessageBox.Show(dataRowView["id"].ToString());
                 dataproductos = controlador.productos(dataRowView["id"].ToString());
                 dataGridproductos.ItemsSource = dataproductos.DefaultView;// controlador.productos(dataRowView["id"].ToString()).DefaultView;
                 

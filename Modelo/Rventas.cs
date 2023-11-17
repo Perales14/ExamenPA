@@ -45,7 +45,7 @@ namespace ExamenPA.Modelo
         {
             DataTable data = alma.DatosTabla();
             DataRow dr = data.NewRow();
-
+            data.Clear();
             
 
             String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
@@ -53,55 +53,45 @@ namespace ExamenPA.Modelo
             direc = Path.GetDirectoryName(direc);
             string rutaArchivo = Path.Combine(direc, "Ventas", "ventas.txt");
             string[] lineas = File.ReadAllLines(rutaArchivo);
-            //MessageBox.Show(rutaArchivo);
+            String ln = "";
             foreach (string linea in lineas)
             {
-                string[] elementos = linea.Split(',');
-
-                // Verifica si la línea comienza con el ID buscado
-                if (elementos.Length > 0 && elementos[0].Trim() == idventa)
+                if (linea.Split(",")[0].Equals(idventa))
                 {
-                    // Comenzamos desde 1 para saltar el ID
-                    for (int i = 1; i < elementos.Length; i += 2)
-                    {
-                        // Asegúrate de que haya un par cantidad-ID de producto
-                        if (i + 1 < elementos.Length)
-                        {
-                            abrir();
-                            OleDbCommand cmd = new OleDbCommand();
+                    ln = linea;
+                    MessageBox.Show(ln);
 
-                            cmd.Connection = conexion;
-                            cmd.CommandText = "SELECT * From Almacen WHERE id=?";
-                            cmd.Parameters.AddWithValue("id", idventa);
-                            using (var reader = cmd.ExecuteReader())
-                            {
-                                if (reader.Read())
-                                {
-                                    dr["id"] = Convert.ToInt32(reader["id"]);
-                                    dr["nombre"] = reader["nombre"].ToString();
-                                    dr["precio"] = Convert.ToDecimal(reader["precio"]);
-                                    dr["stock"]= Convert.ToInt32(reader["stock"]);
-                                    dr["categoria"] = reader["categoria"].ToString();
-                                    dr["proveedor"]= reader["proveedor"].ToString();
-                                    data.Rows.Add(dr);
-                                    // Ahora tienes los valores de cada columna para la fila con el ID específico
-                                    // Puedes utilizar estos valores como necesites
-                                }
-                            }
-
-                        }
-                    }
+                    break;
                 }
+                
             }
+            if (ln.Equals(""))
+            {
+                return data;
+            }
+            string[] elementos = ln.Split(',');
+            String nombre = "", cantidad = "";
+            for(int i=1;i< elementos.Length; i += 2)//inicia del 1 para saltarse el idventa
+            {
+                nombre = elementos[i];
+                cantidad = elementos[i + 1];
+                Product controlp = new Product();
+                dr = controlp.producto(nombre);
+                dr["stock"] = cantidad;
+                data.Rows.Add(dr);
 
-            dr.Table.Columns["stock"].ColumnName = "cantidad";
+
+            }
+            
+
+                dr.Table.Columns["stock"].ColumnName = "cantidad";
 
             return data;
             
 
         }
 
-        public void guardaridventa(String idventa, DataTable data)
+        public void guardaridventa(String nombre, DataTable data)
         {
             crear();
             String direc = Path.GetDirectoryName(Directory.GetCurrentDirectory());
@@ -110,12 +100,13 @@ namespace ExamenPA.Modelo
             string rutaArchivo = Path.Combine(direc, "Ventas", "ventas.txt");
             using (StreamWriter sw = File.AppendText(rutaArchivo))
             {
-                sw.WriteLine(idventa);
-                sw.WriteLine(",");
+                sw.Write(nombre);
                 foreach (DataRow dr in data.Rows)
                 {
-                    sw.WriteLine(dr["cantidad"] + "," + dr["id"]);
+                    sw.Write("," + dr["nombre"] + "," + dr["cantidad"]);
                 }
+                sw.WriteLine("");
+                sw.Close();
             }
         }
 
